@@ -19,6 +19,7 @@ import {serverConfig as config} from 'c0nfig'
 
 //Server stuff
 import cookieParser from 'cookie-parser'
+import io from 'socket.io'
 import Session from 'express-session'
 import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
@@ -36,6 +37,7 @@ import TokenAPI from './api/endpoints/token'
 import UserAPI from './api/endpoints/user'
 import AuthAPI from './api/endpoints/auth'
 import DMAPI from './api/endpoints/dm'
+import Roomedit3dApi from './api/endpoints/roomedit3d'
 
 //Services
 import DerivativeSvc from './api/services/DerivativeSvc'
@@ -122,6 +124,9 @@ var server = app.listen(app.get('port'), function() {
     var derivativeSvc = new DerivativeSvc({
         config: config
     })
+
+    var io2 = io(server);
+    app.use('/api/roomedit3d', Roomedit3dApi(io2));
 
     console.log('Server listening on: ')
     console.log(server.address())
