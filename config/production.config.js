@@ -22,7 +22,7 @@ module.exports = {
 
   serverConfig: {
 
-    redirectUrl: 'https://forge.autodesk.io/api/auth/callback',
+    redirectUrl: process.env.FORGE_CALLBACKURL, // 'https://forge.autodesk.io/api/auth/callback'
     authenticationUrl: '/authentication/' + OAUTH_VERSION + '/authorize',
     accessTokenUrl: '/authentication/' + OAUTH_VERSION + '/gettoken',
     baseUrl: BASE_URL,
